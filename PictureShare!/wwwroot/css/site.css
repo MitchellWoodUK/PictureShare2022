@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Hubballi&family=Miriam+Libre&family=Neucha&display=swap');
+
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
@@ -23,4 +25,7 @@ body {
     width: 100%;
     white-space: nowrap;
     line-height: 60px;
+}
+.caption {
+    font-family: 'Hubballi', cursive;
 }

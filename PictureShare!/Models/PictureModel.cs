@@ -16,6 +16,7 @@ namespace PictureShare_.Models
         public string ImagePath { get; set; }
 
         public DateTime TimeStamp { get; set; }
+        public bool Public { get; set; }
 
     }
 }

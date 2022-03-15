@@ -36,7 +36,7 @@ namespace PictureShare_.Controllers
         {
             model.TimeStamp = DateTime.Now;
             model.UserEmail = User.Identity.Name;
-                
+            model.Public = false;
             var file = Request.Form.Files[0];
 
             Images images = new Images(_env);
@@ -46,6 +46,45 @@ namespace PictureShare_.Controllers
             await _db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
             
+        }
+
+        public async Task<IActionResult> Delete(string id)
+        {
+            if(id == null)
+            {
+                return NotFound();
+            }
+
+            var picture = await _db.Pictures.FirstOrDefaultAsync(p => p.Id == Guid.Parse(id));
+            if(picture == null)
+            {
+                return NotFound();
+            }
+
+            _db.Pictures.Remove(picture);
+            await _db.SaveChangesAsync();   
+            _image.Delete(picture.ImagePath);
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> makePublic(Guid id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var picture = await _db.Pictures.FirstOrDefaultAsync(p => p.Id == id);
+            if (picture == null)
+            {
+                return NotFound();
+            }
+
+            picture.Public = true;
+            _db.Pictures.Update(picture);
+            await _db.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
 
     }

@@ -36,6 +36,18 @@
             return $"{path}{newFilename}";
         }
 
+        public bool Delete(string path)
+        {
+            //adds the full path to the image path so it knows where to delete the file from.
+            path = _env.WebRootPath + path;
+            if (File.Exists(path))
+            {
+                File.Delete(path);
+                return true;
+            }
+            return false;
+        }
+
 
     }
 }
