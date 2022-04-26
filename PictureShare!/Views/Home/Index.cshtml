@@ -1,8 +1,24 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model IEnumerable<PictureModel>
+
+@if (Model != null)
+{
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="card my-3 mx-3 shadow" style="width: 18rem;">
+                <img src="@item.ImagePath" class="card-img-top my-2" alt="@item.Caption">
+                <hr />
+                <div class="card-body p-1 text-center">
+                    <h4 class="caption card-title fw-bold" style="color: black">@item.Caption</h4>
+                </div>
+                       
+                <div class="text-center my-2">
+                    <p class="my-1 lh-1 small fst-italic">@item.UserEmail</p>
+                    <p class="my-1 lh-1 small fst-italic">@item.TimeStamp</p>                  
+                </div>
+            </div>
+        } 
+    </div>
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+

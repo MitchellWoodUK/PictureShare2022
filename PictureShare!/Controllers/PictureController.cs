@@ -81,7 +81,7 @@ namespace PictureShare_.Controllers
                 return NotFound();
             }
 
-            picture.Public = true;
+            picture.Public = !picture.Public;
             _db.Pictures.Update(picture);
             await _db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

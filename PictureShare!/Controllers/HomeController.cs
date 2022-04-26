@@ -19,8 +19,7 @@ namespace PictureShare_.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var pictures = await _db.Pictures.ToListAsync();
-
+            var pictures = await _db.Pictures.Where(x => x.Public == true).ToListAsync();
             return View(pictures);
         }
 
