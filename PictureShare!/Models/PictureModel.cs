@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PictureShare_.Models
 {
@@ -17,6 +18,10 @@ namespace PictureShare_.Models
 
         public DateTime TimeStamp { get; set; }
         public bool Public { get; set; }
+        
+        public int CategoryId { get; set; }
+        [ForeignKey("CategoryId")]
+        public CategoryModel Category { get; set; }
 
     }
 }

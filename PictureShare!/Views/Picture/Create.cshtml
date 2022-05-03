@@ -1,4 +1,4 @@
-﻿@model PictureModel
+﻿@model PictureViewModel
 
 
 <div class="my-3">
@@ -15,14 +15,17 @@
             <h2 class="text-center mb-3"> Upload a new picture!</h2>
 
             <div class="mb-3">
-                <input asp-for="Caption" class="form-control form-control" type="text" placeholder="caption" name="caption">
-                <span asp-validation-for="Caption" class="text-danger"></span>
+                <input asp-for="Picture.Caption" class="form-control form-control" type="text" placeholder="caption" name="caption">
+                <span asp-validation-for="Picture.Caption" class="text-danger"></span>
             </div>
 
             <div class="mb-3">
                 <input class="form-control" type="file" id="formFile" name="formFile" accept="image/*">
             </div>
-
+            <div class="mb-3">
+                @Html.DropDownListFor(m => m.Picture.CategoryId, Model.CategoryList, "Select a category", new {@class = "form-select"})
+                <span asp-validation-for="Picture.CategoryId" class="text-danger"></span>
+            </div>
             <div class="mb-3">
                 <button type="submit" class="btn btn-primary w-100">Upload</button>
             </div>

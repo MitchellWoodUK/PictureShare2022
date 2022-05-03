@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PictureShare_.Data;
 using PictureShare_.Helpers;
@@ -29,18 +30,29 @@ namespace PictureShare_.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            return View();
+            PictureViewModel pictureViewModel = new PictureViewModel()
+            {
+                Picture = new PictureModel(),
+                CategoryList = _db.Categories.Select(c => new SelectListItem
+                {
+                    Text = c.Name,
+                    Value = c.Id.ToString()
+                })
+            };
+            return View(pictureViewModel);
         }
+
+
         [HttpPost]
-        public async Task<IActionResult> Create(PictureModel model)
+        public async Task<IActionResult> Create(PictureViewModel model)
         {
-            model.TimeStamp = DateTime.Now;
-            model.UserEmail = User.Identity.Name;
-            model.Public = false;
+            model.Picture.TimeStamp = DateTime.Now;
+            model.Picture.UserEmail = User.Identity.Name;
+            model.Picture.Public = false;
             var file = Request.Form.Files[0];
 
             Images images = new Images(_env);
-            model.ImagePath = await images.Upload(file, "/Images/");
+            model.Picture.ImagePath = await images.Upload(file, "/Images/");
 
             await _db.Pictures.AddAsync(model);
             await _db.SaveChangesAsync();
