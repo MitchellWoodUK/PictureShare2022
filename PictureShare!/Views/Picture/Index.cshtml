@@ -10,22 +10,28 @@
     <div class="row">
         @foreach (var item in Model)
         {
-            <div class="card my-3 mx-3 shadow" style="width: 18rem;">
-                <a asp-controller="Picture" asp-action="Delete" asp-route-id="@item.Id" class="ms-auto fs-4 text-decoration-none">X</a>
+            
+                <div class="card my-3 mx-3 shadow" style="width: 18rem;">
+                    <a asp-controller="Picture" asp-action="Delete" asp-route-id="@item.Id" class="ms-auto fs-4 text-decoration-none">X</a>
 
 
-                <img src="@item.ImagePath" class="card-img-top my-2" alt="@item.Caption">
-                <hr />
-                <div class="card-body p-1 text-center">
-                    <h4 class="caption card-title fw-bold" style="color: black">@item.Caption</h4>
-                </div>
+                    <img src="@item.ImagePath" class="card-img-top my-2" alt="@item.Caption">
+                    <hr />
+                    <div class="card-body p-1 text-center">
+                        <h4 class="caption card-title fw-bold" style="color: black">@item.Caption</h4>
+                    </div>
                        
-                <div class="text-center my-2">
-                    <p class="my-1 lh-1 small fst-italic">@item.UserEmail</p>
-                    <p class="my-1 lh-1 small fst-italic">@item.TimeStamp</p>
-                    <a class="btn btn-primary" asp-action="makePublic" asp-route-id="@item.Id">@(item.Public ? "Make Private" : "Make Public" )</a>
+                    <div class="text-center my-2">
+                        <p class="my-1 lh-1 small fst-italic">@item.UserEmail</p>
+                        <p class="my-1 lh-1 small fst-italic">@item.Category.Name</p>
+                        <p class="my-1 lh-1 small fst-italic">@item.TimeStamp</p>
+                        <a class="btn btn-primary" asp-action="makePublic" asp-route-id="@item.Id">@(item.Public ? "Make Private" : "Make Public" )</a>
+                        <p class="my-1 lh-1 small fst-italic">@item.Comments.Count() comments</p>
+                        <a class="btn btn-secondary" asp-action="Details" asp-route-id="@item.Id">Add Comment</a>
+
+                    </div>
                 </div>
-            </div>
+            
         } 
     </div>
 }

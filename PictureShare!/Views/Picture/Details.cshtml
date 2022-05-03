@@ -1,0 +1,32 @@
+﻿@model PictureModel;
+
+
+    <div class="row justify-content-center" >
+            <div class="card my-3 mx-3 shadow text-center" style="width: 50rem;">
+                <img src="@Model.ImagePath" class="card-img-top my-2" alt="@Model.Caption">
+
+                <hr />
+                <div class="card-body p-1 text-center">
+                    <h4 class="caption card-title fw-bold" style="color: black">@Model.Caption</h4>
+                </div>
+
+                <div class="text-center my-2">
+                    <p class="my-1 lh-1 small fst-italic">@Model.UserEmail</p>
+                    <p class="my-1 lh-1 small fst-italic">@Model.Category.Name</p>
+                    <p class="my-1 lh-1 small fst-italic">@Model.TimeStamp</p>
+                </div>
+            </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col">
+            <form asp-action="Comment" method="post">
+                <input type="hidden" value="@Model.Id" />
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Type Here..." />
+                    <button type="submit" class="btn btn-outline-secondary">Add Comment</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+

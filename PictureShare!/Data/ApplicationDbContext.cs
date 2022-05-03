@@ -9,6 +9,7 @@ namespace PictureShare_.Data
         public DbSet<PictureModel> Pictures { get; set; }
         public DbSet<ProfileModel> Profiles { get; set; }
         public DbSet<CategoryModel> Categories { get; set; }
+        public DbSet<CommentModel> Comments { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }

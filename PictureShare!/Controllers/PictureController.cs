@@ -23,7 +23,7 @@ namespace PictureShare_.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var pictures = await _db.Pictures.Where(x => x.UserEmail == User.Identity.Name).ToListAsync();
+            var pictures = await _db.Pictures.Where(x => x.UserEmail == User.Identity.Name).Include("Category").ToListAsync();
             return View(pictures);
         }
 
@@ -54,7 +54,7 @@ namespace PictureShare_.Controllers
             Images images = new Images(_env);
             model.Picture.ImagePath = await images.Upload(file, "/Images/");
 
-            await _db.Pictures.AddAsync(model);
+            await _db.Pictures.AddAsync(model.Picture);
             await _db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
             
@@ -97,6 +97,20 @@ namespace PictureShare_.Controllers
             _db.Pictures.Update(picture);
             await _db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+
+
+        public async Task<IActionResult> Details(string id)
+        {
+            if (id != null)
+            {
+                var picture = await _db.Pictures.Where(x => x.Id.ToString() == id).Include("Category").FirstOrDefaultAsync();
+                return View(picture);
+            }
+            else
+            {
+                return View(nameof(Index));
+            }
         }
 
     }

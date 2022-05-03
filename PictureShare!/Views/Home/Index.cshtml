@@ -14,7 +14,10 @@
                        
                 <div class="text-center my-2">
                     <p class="my-1 lh-1 small fst-italic">@item.UserEmail</p>
-                    <p class="my-1 lh-1 small fst-italic">@item.TimeStamp</p>                  
+                    <p class="my-1 lh-1 small fst-italic">@item.Category.Name</p>
+                    <p class="my-1 lh-1 small fst-italic">@item.TimeStamp</p>       
+                    <p class="my-1 lh-1 small fst-italic">@item.Comments.Count() comments</p>
+                    <a class="btn btn-secondary " asp-controller="Picture" asp-action="Details" asp-route-id="@item.Id">Add Comment</a>
                 </div>
             </div>
         } 
